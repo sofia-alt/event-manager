@@ -3,8 +3,8 @@
     <v-layout column>
       <h1>Events</h1>
       <v-layout md12 class="g-20">
-        <event-list :events-list="eventsList" @select-card="selectListItem"/>
-        <event-card :select-card="selectedCard"/>
+        <event-list :events="events" @select-card="selectListItem"/>
+        <router-view></router-view>
       </v-layout>
     </v-layout>
   </v-container>
@@ -23,7 +23,7 @@
     },
     data () {
       return {
-        eventsList: events,
+        events,
         selectedCard: null
       }
     },

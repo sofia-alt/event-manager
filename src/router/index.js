@@ -6,12 +6,17 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Events',
+    path: '',
+    name: 'events',
     component: Events,
+    props: { default: true, sidebar: false },
+    redirect: '/0',
     children: [
       {
-        path: '/:id'
+        name: 'event',
+        path: '/:id',
+        component: () => import('@/components/Event/EventCard'),
+        props: { default: true, sidebar: false }
       }]
   }
 ]

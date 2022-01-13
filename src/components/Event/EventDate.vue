@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ DateEvent }}
+    {{ date }}
   </div>
 </template>
 
@@ -10,12 +10,18 @@
     name: 'EventCard',
     props: {
       DateEvent: {
-        type: Date,
-        required: false
+        type: String
       }
     },
     data() {
-      return {}
+      return {
+        // date: ''
+      }
+    },
+    computed: {
+      date() {
+        return new Date(this.DateEvent)
+      }
     }
   })
 </script>

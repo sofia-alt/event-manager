@@ -1,7 +1,7 @@
 <template>
   <v-flex md8 ml-2>
     <v-card>
-      <event-date :date-event="convertToDate(selectCard.From)"></event-date>
+      <event-date :date-event="selectCard.From"></event-date>
       {{ selectCard }}
     </v-card>
   </v-flex>
@@ -9,23 +9,28 @@
 
 <script>
   import EventDate from './EventDate.vue'
-  import { convertToDate } from '@/helpers/convertToDate'
-
+  import api from '@/api.js'
   export default ({
   components: { EventDate },
     name: 'EventCard',
-    props: {
-      selectCard: {
-        type: Object,
-        default: {},
-        required: true
+    props: {},
+    data() {
+      return {
+        selectCard: {}
       }
     },
-    data() {
-      return {}
-    },
     methods: {
-      convertToDate
+      async getCard() {
+        this.selectCard = await api.events.getById(this.$route.params.id)
+      }
+    },
+    watch: {
+      '$route.params.id'() {
+        this.getCard()
+      }
+    },
+    mounted() {
+      this.getCard()
     }
   })
 </script>

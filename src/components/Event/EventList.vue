@@ -3,12 +3,13 @@
     <v-card>
       <v-list>
         <v-list-item
-          v-for="item in eventsList"
+          v-for="item in events"
           :key="item.ID"
-          @click="$emit('select-card', item)"
         >
-          <event-date :date-event="convertToDate(item.From)"></event-date>
-          {{ item.Name }}
+          <router-link :to="{ name: 'event', params: { id: item.ID }}">
+            <event-date :date-event="item.From"></event-date>
+            {{ item.Name }}
+          </router-link>
         </v-list-item>
       </v-list>
     </v-card>
@@ -17,26 +18,20 @@
 
 <script>
   import EventDate from './EventDate.vue'
-  import { convertToDate } from '@/helpers/convertToDate'
 
   export default ({
-  components: { EventDate },
+    components: { EventDate },
     name: 'EventList',
     props: {
-      eventsList: {
+      events: {
         type: Array,
-        required: false,
+        required: true,
         default: []
       }
     },
     data() {
       return {}
     },
-    methods: {
-      convertToDate
-    },
-    mounted() {
-      this.$emit('select-card', this.$props.eventsList[0])
-    }
+    created() {},
   })
 </script>
