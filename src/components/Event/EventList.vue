@@ -1,19 +1,19 @@
 <template>
-  <v-flex md4 ml-2>
-    <v-card>
-      <v-list>
+  <v-layout>
+    <v-card class="event__container">
+      <v-list class="event__list">
         <v-list-item
           v-for="item in events"
           :key="item.ID"
         >
-          <router-link :to="{ name: 'event', params: { id: item.ID }}">
+          <router-link :to="{ name: 'event', params: { id: item.ID }}" class="event__link">
             <event-date :date-event="item.From"></event-date>
             {{ item.Name }}
           </router-link>
         </v-list-item>
       </v-list>
     </v-card>
-  </v-flex>
+  </v-layout>
 </template>
 
 <script>

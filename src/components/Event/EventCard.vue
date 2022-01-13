@@ -1,10 +1,26 @@
 <template>
-  <v-flex md8 ml-2>
-    <v-card>
+  <v-layout>
+    <v-card class="event__card">
       <event-date :date-event="selectCard.From"></event-date>
-      {{ selectCard }}
+      <v-list class="employee">
+        <v-list-item
+          v-for="item in selectCard.Participants"
+          :key="item.ID"
+          class="employee__item"
+        >
+          <v-img
+            :src="`${item.Photo}`"
+            :alt="item.Name"
+            width="33"
+            height="33"
+            class="employee__photo"
+          ></v-img>
+          <span class="employee__name">{{ item.Name }}</span>
+        </v-list-item>
+      </v-list>
+      <p class="event__text"> {{ selectCard.Description }} </p>
     </v-card>
-  </v-flex>
+  </v-layout>
 </template>
 
 <script>

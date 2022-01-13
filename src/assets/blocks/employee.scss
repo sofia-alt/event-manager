@@ -1,0 +1,30 @@
+.employee {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  padding: 5px 15px;
+  border-top: 1px solid #ECF0F2 !important;
+  border-bottom: 1px solid #ECF0F2 !important;
+  margin-bottom: 35px;
+  margin-top: 15px;
+
+  &__photo {
+    border-radius: 50%;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    flex: 0 0 0;
+    padding: 0;
+    gap: 10px;
+  }
+
+  &__name {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #343A40;
+  }
+}

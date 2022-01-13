@@ -1,0 +1,43 @@
+.event {
+  &__filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  &__wrapper {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  &__link {
+    padding: 5px;
+    display: inline-block;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 19px;
+    padding: 0 25px;
+  }
+
+  &__inner {
+    height: 610px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 2fr 6fr;
+  }
+
+  &__container {
+    flex-grow: 1;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+}
