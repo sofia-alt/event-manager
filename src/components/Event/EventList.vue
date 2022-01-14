@@ -23,24 +23,33 @@
 
 <script>
   import EventDate from './EventDate.vue'
+  import api from '@/api.js'
 
   export default ({
     components: { EventDate },
     name: 'EventList',
     props: {
-      events: {
-        type: Array,
+      filters: {
+        type: Object,
         required: true,
-        default: []
+        default: {}
       }
     },
     data() {
-      return {}
+      return {
+        events: []
+      }
     },
     methods: {
       loadEvents() {
         console.log('Запрос на сервер')
+      },
+      async getEvents() {
+        this.events = await api.events.fetch()
       }
+    },
+    created() {
+      this.getEvents()
     }
 })
 </script>

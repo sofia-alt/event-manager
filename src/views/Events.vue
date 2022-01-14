@@ -6,8 +6,8 @@
         <div class="event__wrapper">
           <v-text-field
             prepend-icon="mdi-magnify"
+            v-model="search"
           >
-            
           </v-text-field>
           <v-menu
             ref="menu"
@@ -61,17 +61,17 @@
       </v-btn>
       </div>
       <div class="event__inner">
-        <event-list :events="events" @select-card="selectListItem"/>
+        <event-list :filters="{dates, search}" @select-card="selectListItem"/>
         <router-view></router-view>
       </div>
     </v-layout>
+    <router-view></router-view>
   </v-container>
 </template>
 
 <script>
   import EventList from '@/components/Event/EventList.vue'
   import EventCard from '@/components/Event/EventCard.vue'
-  import api from '@/api.js'
 
   export default ({
     name: 'Events',
@@ -81,22 +81,16 @@
     },
     data () {
       return {
-        events: [],
         selectedCard: null,
         dates: [],
+        search: '',
         date: ''
       }
     },
     methods: {
       selectListItem(value) {
         this.selectedCard = value
-      },
-      async getEvents() {
-        this.events = await api.events.fetch()
       }
-    },
-    created() {
-      this.getEvents()
     }
   })
 </script>
