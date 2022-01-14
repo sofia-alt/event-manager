@@ -2,22 +2,22 @@
   <v-layout>
     <v-card class="event__card">
       <event-date :date-event="selectCard.From"></event-date>
-      <v-list class="employee">
-        <v-list-item
+      <ul class="employee">
+        <li
           v-for="item in selectCard.Participants"
           :key="item.ID"
           class="employee__item"
         >
-          <v-img
+          <img
             :src="`${item.Photo}`"
             :alt="item.Name"
             width="33"
             height="33"
             class="employee__photo"
-          ></v-img>
+          />
           <span class="employee__name">{{ item.Name }}</span>
-        </v-list-item>
-      </v-list>
+        </li>
+      </ul>
       <p class="event__text"> {{ selectCard.Description }} </p>
     </v-card>
   </v-layout>

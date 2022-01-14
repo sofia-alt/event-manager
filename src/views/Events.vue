@@ -60,10 +60,10 @@
         Create
       </v-btn>
       </div>
-      <v-layout md12 class="event__inner">
+      <div class="event__inner">
         <event-list :events="events" @select-card="selectListItem"/>
         <router-view></router-view>
-      </v-layout>
+      </div>
     </v-layout>
   </v-container>
 </template>

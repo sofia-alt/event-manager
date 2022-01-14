@@ -2,20 +2,21 @@
   display: flex;
   gap: 25px;
   flex-wrap: wrap;
-  padding: 5px 15px;
+  padding: 15px;
   border-top: 1px solid #ECF0F2 !important;
   border-bottom: 1px solid #ECF0F2 !important;
   margin-bottom: 35px;
   margin-top: 15px;
+  list-style: none;
 
   &__photo {
     border-radius: 50%;
+    display: inline-block;
   }
 
   &__item {
     display: flex;
     align-items: center;
-    flex: 0 0 0;
     padding: 0;
     gap: 10px;
   }
