@@ -1,6 +1,7 @@
 import events from './static/events.json';
 
 function getEvents(search, from, till, offset) {
+  console.log('getEvents')
   return Promise
     .resolve(events.map(x => ({
         ...x

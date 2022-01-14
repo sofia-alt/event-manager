@@ -6,6 +6,17 @@
 
 
 <script>
+  const options = {
+    era: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'long',
+    timezone: 'UTC',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+  };
   export default ({
     name: 'EventCard',
     props: {
@@ -20,8 +31,8 @@
     },
     computed: {
       date() {
-        return new Date(this.DateEvent)
-      }
+        return new Date(this.DateEvent).toLocaleString("en-US", options)
+      },
     }
   })
 </script>

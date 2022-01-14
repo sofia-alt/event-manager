@@ -3,7 +3,7 @@
     <v-card class="event__container">
       <v-list
         class="event__list"
-        v-infinite-scroll="loadEvents"
+        v-infinite-scroll="getEvents"
         infinite-scroll-disabled="busy"
         infinite-scroll-distance="10"
       >
@@ -41,13 +41,15 @@
       }
     },
     methods: {
-      loadEvents() {
-        console.log('Запрос на сервер')
-      },
       async getEvents() {
         this.events = await api.events.fetch()
       }
     },
+    watch: {
+      filters() {
+        this.getEvents()
+      }
+    },    
     created() {
       this.getEvents()
     }
