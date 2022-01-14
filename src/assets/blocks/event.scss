@@ -33,6 +33,8 @@
 
   &__container {
     flex-grow: 1;
+    max-height: 610px;
+    overflow-y: scroll;
   }
 
   &__card {
