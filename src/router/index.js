@@ -8,7 +8,6 @@ const routes = [
     name: 'events',
     component: () => import('@/views/Events.vue'),
     props: { default: true, sidebar: false },
-    redirect: '/0',
     children: [
       {
         name: 'event',

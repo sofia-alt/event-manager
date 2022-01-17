@@ -1,8 +1,8 @@
 <template>
   <event-editor>
-    <template v-slot:actions>
-      <v-btn @click="submit"/>
-      <v-btn @click="close"/>
+    <template v-slot:actions="{ submit }">
+      <v-btn @click="submit">Save</v-btn>
+      <v-btn @click="close">Close</v-btn>
     </template>
   </event-editor>
 </template>
@@ -10,9 +10,15 @@
 import EventEditor from './EventEditor.vue'
 export default {
   components: { EventEditor },
-  name: 'EventUpdater',
-  setup() {
-    
+  name: 'event-updater',
+  data() {
+    return{}
   },
+
+  methods: {
+    close() {
+      this.visible = false;
+    },
+  }
 }
 </script>

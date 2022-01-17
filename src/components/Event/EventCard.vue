@@ -1,7 +1,10 @@
 <template>
   <v-layout>
     <v-card class="event__card">
-      <event-date :date-event="selectCard.From"></event-date>
+      <div class="event__wrapper-pa">
+        <p class="event__title">{{ selectCard.Name }}</p>
+        <event-date :value="selectCard.From" :isCard="true"></event-date>
+      </div>
       <ul class="employee">
         <li
           v-for="item in selectCard.Participants"
@@ -18,7 +21,11 @@
           <span class="employee__name">{{ item.Name }}</span>
         </li>
       </ul>
-      <p class="event__text"> {{ selectCard.Description }} </p>
+      <div class="event__wrapper-pa">
+        <p class="event__title">{{ selectCard.Subtitle }}</p>
+        <p class="event__text"> {{ selectCard.Description }} </p>
+        <a class="event__link" :href="selectCard.Link">{{ selectCard.Link }}</a>
+      </div>
     </v-card>
   </v-layout>
 </template>
@@ -28,7 +35,7 @@
   import api from '@/api.js'
   export default ({
   components: { EventDate },
-    name: 'EventCard',
+    name: 'event-card',
     props: {},
     data() {
       return {

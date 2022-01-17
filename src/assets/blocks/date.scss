@@ -1,0 +1,28 @@
+.date {
+  font-size: 13px;
+  line-height: 20px;
+  color: #868E96;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+
+  &_card {
+    justify-content: left;
+  }
+
+    &__day {
+      font-weight: bold;
+      text-transform: uppercase;
+
+    &_active {
+      color: #3B82F6;
+    }
+  }
+
+  &__text {
+    &_active {
+      color: #3B82F6;
+    }
+  }
+}
