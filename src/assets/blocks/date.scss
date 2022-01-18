@@ -25,4 +25,19 @@
       color: #3B82F6;
     }
   }
+
+  &__category {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  &_left {
+    justify-content: left;
+  }
+
+  &_time {
+    font-weight: bold;
+    color: #333333;
+  }
 }

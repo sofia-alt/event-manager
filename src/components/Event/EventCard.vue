@@ -3,7 +3,15 @@
     <v-card class="event__card">
       <div class="event__wrapper-pa">
         <p class="event__title">{{ selectCard.Name }}</p>
-        <event-date :value="selectCard.From" :isCard="true"></event-date>
+        <div class="event__dates">
+          <event-date :value="selectCard.From" :isCard="true"></event-date>
+          <event-time 
+            :from="selectCard.From"
+            :till="selectCard.Till"
+            :link="selectCard.Link"
+            :color="selectCard.Category.Color"
+          />
+        </div>
       </div>
       <ul class="employee">
         <li
@@ -32,26 +40,37 @@
 
 <script>
   import EventDate from './EventDate.vue'
+  import EventTime from './EventTime.vue'
   import api from '@/api.js'
+
   export default ({
-  components: { EventDate },
+    components: {
+      EventDate,
+      EventTime
+    },
+
     name: 'event-card',
+
     props: {},
+
     data() {
       return {
         selectCard: {}
       }
     },
+
     methods: {
       async getCard() {
         this.selectCard = await api.events.getById(this.$route.params.id)
       }
     },
+
     watch: {
       '$route.params.id'() {
         this.getCard()
       }
     },
+
     mounted() {
       this.getCard()
     }

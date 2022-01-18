@@ -8,9 +8,12 @@
 </template>
 <script>
 import EventEditor from './EventEditor.vue'
+
 export default {
   components: { EventEditor },
+
   name: 'event-updater',
+
   data() {
     return{}
   },

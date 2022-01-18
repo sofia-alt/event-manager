@@ -31,6 +31,7 @@ export default {
     close() {
       this.visible = false;
     },
+    
     remove() {
       console.log('remove')
     }

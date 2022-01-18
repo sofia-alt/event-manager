@@ -75,4 +75,14 @@
       color: #BDBDBD !important;
     }
   }
+
+  &__dates {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__list {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }

@@ -60,6 +60,7 @@
 <script>
 export default {
   name: "event-editor",
+  
   data() {
     return {
       date: "",

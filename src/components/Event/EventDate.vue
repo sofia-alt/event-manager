@@ -44,7 +44,6 @@ data() {
 },
 
 computed: {
-
   today() {
     return new Date().getDate()
   },
