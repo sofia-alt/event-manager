@@ -1,7 +1,7 @@
 <template>
-  <div class="date date_time date_left">
-     <div class="date__category" :style="{ 'background-color': `${color}` }"></div>
-     <span class="date__text">{{ start }} - {{ end }}</span>
+  <div class="date date_time date_left" v-if="event">
+     <div v-if="event.Category" class="date__category" :style="{ 'background-color': `${event.Category.Color}` }"></div>
+     <span :class="[`date__text`, {'date__text_link': event.Link}]">{{ start }} - {{ end }}</span>
   </div>
 </template>
 
@@ -16,37 +16,27 @@ export default ({
 name: 'event-time',
 
 props: {
-  from: {
-    type: Date
-  }, 
-  till: {
-    type: Date
-  },
-  link: {
-    type: String
-  },
-  color: {
-    type: String
+  event: {
+    type: Object,
+    required: true
   }
 },
 
 data() {
-  return {
-    active: false
-  }
+  return {}
 },
 
 computed: {
 
   start() {
-    if (this.from) {
-      return this.from.toLocaleString("en-US", FORMAT_DATE_OPTIONS);
+    if (this.event.From) {
+      return this.event.From.toLocaleString("en-US", FORMAT_DATE_OPTIONS);
     }
   },
 
   end() {
-    if (this.till) {
-      return this.till.toLocaleString("en-US", FORMAT_DATE_OPTIONS);
+    if (this.event.Till) {
+      return this.event.Till.toLocaleString("en-US", FORMAT_DATE_OPTIONS);
     }
   }
 }

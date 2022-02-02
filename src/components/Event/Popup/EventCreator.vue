@@ -4,10 +4,9 @@
       <v-btn dark v-bind="attrs" v-on="on">Create</v-btn>
     </template>
 
-    <event-editor>
+    <event-editor :value="empty" @submit="submit">
       <template v-slot:actions="{ submit }">
         <v-btn @click="submit">Save</v-btn>
-        <v-btn @click="remove">Remove</v-btn>
         <v-btn @click="close">Close</v-btn>
       </template>
     </event-editor>
@@ -24,17 +23,28 @@ export default {
   data() {
     return {
       visible: false,
+      empty: {
+        From: null,
+        Till: null,
+        Repeat: null,
+        Name: null,
+        Subtitle: null,
+        Link: null,
+        Description: null,
+        Category: {},
+        Participants: []
+      },
     };
   },
 
   methods: {
+    submit(value) {
+
+    },
+
     close() {
       this.visible = false;
     },
-    
-    remove() {
-      console.log('remove')
-    }
   },
 };
 </script>    

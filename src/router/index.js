@@ -13,15 +13,17 @@ const routes = [
         name: 'event',
         path: '/:id',
         component: () => import('@/components/Event/EventCard'),
-        props: { default: true, sidebar: false }
+        props: { default: true, sidebar: false },
+        children:  [
+          {
+            path: '/:id/modal',
+            name: 'modal',
+            props: { default: true, sidebar: false },
+            component: () => import('@/components/Event/Popup/EventUpdater')
+          }
+        ]
       }]
   },
-  {
-    path: '/modal/:id',
-    name: 'modal',
-    props: { default: true, sidebar: false },
-    component: () => import('@/components/Event/Popup/EventEditor')
-  }
 ]
 
 const router = new VueRouter({

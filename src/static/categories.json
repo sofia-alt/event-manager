@@ -1,0 +1,17 @@
+[
+  {
+    "ID":0,
+    "Name": "Sales",
+    "Color": "#EC4899"
+  },
+  {
+    "ID": 1,
+    "Name": "Review",
+    "Color": "#3B82F6"
+  },
+  {
+    "ID": 2,
+    "Name": "Discuss",
+    "Color": "#FBBF24"
+  }
+]

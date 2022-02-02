@@ -1,52 +1,50 @@
 <template>
   <v-layout>
-    <v-card class="event__card">
+    <v-card class="event__card" v-if="Object.keys(event).length > 0">
       <div class="event__wrapper-pa">
-        <p class="event__title">{{ selectCard.Name }}</p>
+        <p class="event__title">{{ event.Name }}</p>
         <div class="event__dates">
-          <event-date :value="selectCard.From" :isCard="true"></event-date>
-          <event-time 
-            :from="selectCard.From"
-            :till="selectCard.Till"
-            :link="selectCard.Link"
-            :color="selectCard.Category.Color"
-          />
+          <event-date :value="event.From" :is-card="true"></event-date>
+          <event-time :event="event"/>
         </div>
       </div>
       <ul class="employee">
         <li
-          v-for="item in selectCard.Participants"
-          :key="item.ID"
+          v-for="participant in event.Participants"
+          :key="participant.ID"
           class="employee__item"
         >
           <img
-            :src="`${item.Photo}`"
-            :alt="item.Name"
+            :src="`${participant.Photo}`"
+            :alt="participant.Name"
             width="33"
             height="33"
             class="employee__photo"
           />
-          <span class="employee__name">{{ item.Name }}</span>
+          <span class="employee__name">{{ participant.Name }}</span>
         </li>
       </ul>
       <div class="event__wrapper-pa">
-        <p class="event__title">{{ selectCard.Subtitle }}</p>
-        <p class="event__text"> {{ selectCard.Description }} </p>
-        <a class="event__link" :href="selectCard.Link">{{ selectCard.Link }}</a>
+        <p class="event__title">{{ event.Subtitle }}</p>
+        <p class="event__text"> {{ event.Description }} </p>
+        <a class="event__link" :href="event.Link">{{ event.Link }}</a>
       </div>
+      <event-updater :value="event"></event-updater>
     </v-card>
-  </v-layout>
+  </v-layout>  
 </template>
 
 <script>
   import EventDate from './EventDate.vue'
   import EventTime from './EventTime.vue'
+  import EventUpdater from "@/components/Event/Popup/EventUpdater.vue";
   import api from '@/api.js'
 
   export default ({
     components: {
       EventDate,
-      EventTime
+      EventTime,
+      EventUpdater
     },
 
     name: 'event-card',
@@ -55,13 +53,13 @@
 
     data() {
       return {
-        selectCard: {}
+        event: {}
       }
     },
 
     methods: {
       async getCard() {
-        this.selectCard = await api.events.getById(this.$route.params.id)
+        this.event = await api.events.getById(this.$route.params.id)
       }
     },
 
@@ -72,7 +70,9 @@
     },
 
     mounted() {
-      this.getCard()
+      if(this.$route.params.id) {
+        this.getCard()
+      }
     }
   })
 </script>

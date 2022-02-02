@@ -21,8 +21,22 @@
   }
 
   &__text {
+    position: relative;
+    padding-right: 16px;
+
     &_active {
       color: #3B82F6;
+    }
+    &_link {
+      &::after {
+        position: absolute;
+        content: "";
+        width: 12px;
+        height: 12px;
+        background-image: url('../icons/video-icon.svg');
+        right: 0;
+        top: 4px;
+      }
     }
   }
 

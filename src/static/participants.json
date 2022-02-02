@@ -1,0 +1,32 @@
+[
+  {
+    "ID": 0,
+    "Name": "Anna Portnova",
+    "Photo": "https://images.pexels.com/photos/2887756/pexels-photo-2887756.jpeg",
+    "Login": "aportnova"
+  },
+  {
+    "ID": 1,
+    "Name": "Oleg Darov",
+    "Photo": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
+    "Login": "odarov"
+  },
+  {
+    "ID": 2,
+    "Name": "Inna Voloshina",
+    "Photo": "https://images.pexels.com/photos/3776932/pexels-photo-3776932.jpeg",
+    "Login": "ivoloshina"
+  },
+  {
+    "ID": 3,
+    "Name": "Anastasia Andreeva",
+    "Photo": "https://images.pexels.com/photos/983688/pexels-photo-983688.jpeg",
+    "Login": "aandreeva"
+  },
+  {
+    "ID": 4,
+    "Name": "Alexey Sonin",
+    "Photo": "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
+    "Login": "asonin"
+  }
+]

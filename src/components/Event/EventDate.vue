@@ -37,19 +37,20 @@ props: {
   }
 },
 
-data() {
-  return {
-    active: false
-  }
-},
-
 computed: {
   today() {
-    return new Date().getDate()
+    return new Date().setHours(0, 0, 0, 0);
   },
 
   tomorrow() {
+    // add one day to today
     return this.today + 1
+  },
+
+  active() {
+    if (this.value) {
+      return this.value.setHours(0, 0, 0, 0) == this.today;
+    } else return false
   },
 
   prefix() {
@@ -57,16 +58,16 @@ computed: {
       return
     }
 
-    switch(this.value.getDate()) {
-      case this.today:
-        this.active = true
+    switch(this.value.setHours(0, 0, 0, 0)) {
+      case this.today:      
         return 'Today'
 
       case this.tomorrow:
         return 'Tomorrow'
 
       default: {
-        return DAYS[new Date(this.value).getDay()]
+        // use Intl
+        return DAYS[this.value.getDay()]
       }
     }
   },

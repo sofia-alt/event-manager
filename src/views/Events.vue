@@ -6,7 +6,7 @@
         <div class="event__layout">
           <v-text-field
             prepend-icon="mdi-magnify"
-            v-model="search"
+            v-model="filters.search"
             placeholder="Search"
             clearable
           >
@@ -15,14 +15,14 @@
             ref="menu"
             v-model="menu"
             :close-on-content-click="false"
-            :return-value.sync="date"
+            :return-value.sync="filters.date"
             transition="scale-transition"
             offset-y
             min-width="auto"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="date"
+                v-model="filters.date"
                 placeholder="Date"
                 prepend-icon="mdi-calendar"
                 readonly
@@ -31,10 +31,10 @@
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker v-model="date" no-title scrollable>
+            <v-date-picker v-model="filters.date" no-title scrollable>
               <v-spacer></v-spacer>
               <v-btn text color="primary" @click="menu = false"> Cancel </v-btn>
-              <v-btn text color="primary" @click="$refs.menu.save(date)">
+              <v-btn text color="primary" @click="$refs.menu.save(filters.date)">
                 OK
               </v-btn>
             </v-date-picker>
@@ -43,7 +43,19 @@
         <event-creator/>
       </div>
       <div class="event__inner">
-        <event-list :filters="{ date, search }" />
+        <v-card class="event__container">
+          <v-list
+            class="event__list pa-0"
+            v-infinite-scroll="getEvents"
+            infinite-scroll-disabled="busy"
+            infinite-scroll-distance="6"
+          >
+            <v-list-item v-for="(group, key) in groups" :key="key" class="pa-0">
+              <event-group :value="group"/>
+            </v-list-item>
+          </v-list>
+        </v-card>
+        <!-- <event-card></event-card> -->
         <router-view></router-view>
       </div>
     </v-layout>
@@ -51,25 +63,68 @@
 </template>
 
 <script>
-import EventList from "@/components/Event/EventList.vue";
-import EventEditor from "@/components/Event/Popup/EventEditor.vue";
 import EventCreator from '@/components/Event/Popup/EventCreator.vue';
+import EventGroup from '@/components/Event/EventGroup.vue';
+import api from "@/api.js";
+import EventCard from '../components/Event/EventCard.vue';
+import Wrapper from '../components/Wrapper.vue'
 
 export default {
-  name: "Events",
+  name: "events",
 
   components: {
-    EventList,
-    EventEditor,
-    EventCreator
+    EventGroup,
+    EventCreator,
+    EventCard,
+    Wrapper
   },
 
   data() {
     return {
-      search: "",
-      date: "",
+      events: [],
+      filters: {
+        search: "",
+        date: "",
+      },
       menu: false,
     };
+  },
+
+   computed: {
+    groups() {
+      return this.events.reduce((groups, event) => {
+        const key = event.Date.getTime();
+        const group =
+          groups[key] ||
+          (groups[key] = {
+            Date: event.Date,
+            Events: [],
+          });
+
+        group.Events.push(event);
+        return groups;
+      }, {});
+    },
+  },
+
+  watch: {
+    filters: {
+      deep: true,
+      immediate: true,
+      handler() {
+        this.events = [];
+        this.getEvents();
+      },
+    },
+  },
+
+  methods: {
+    async getEvents() {
+      this.events = this.events.concat(await api.events.fetch(null, null, null, this.events.length));
+    },
+    async getEventsv2() {
+      return api.events.fetch(null, null, null, this.events.length)
+    }
   },
 };
 </script>
