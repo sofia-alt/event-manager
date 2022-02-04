@@ -55,7 +55,6 @@
             </v-list-item>
           </v-list>
         </v-card>
-        <!-- <event-card></event-card> -->
         <router-view></router-view>
       </div>
     </v-layout>

@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-sheet
-    :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
-    class="pa-3"
-    v-if="loading"
+      :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
+      class="pa-3"
+      v-if="loading"
     >
       <v-skeleton-loader
         class="mx-auto"
@@ -12,73 +12,49 @@
       ></v-skeleton-loader>
     </v-sheet>
     <slot v-else-if="error" name="error" v-bind="{ error }">
-        {{ error }}
+      {{ error }}
     </slot>
-    <slot v-else name="component" v-bind="{ value }"/>
+    <slot v-else name="default" v-bind="{ value }" />
   </div>
 </template>
 
 <script>
-class Operation {
-  execute() {
-
-  }
-
-  on(event, action) {
-
-  }
-}
-
-class HttpGet {
-  constructor (url) {
-    this.url = url;
-  }
-
-  execute() {
-    axios.get()
-  }
-}
-
-class GetEventOperation {
-  execute() {
-    return 
-  }
-}
+import { Operation } from "../api";
 
 export default {
   props: {
     executor: {
       type: Operation,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
       loading: false,
       error: null,
-      value: null
-    }
+      value: null,
+    };
   },
 
-  methods: {
-    
+  watch: {
+    executor: {
+      immediate: true,
+      handler() {
+        this.loading = true;
+        this.executor
+          .on("success", (response) => {
+            this.value = response;
+            this.loading = false;
+          })
+          .on("error", (error) => {
+            this.value = null;
+            this.error = error;
+            this.loading = false;
+          })
+          .execute();
+      },
+    },
   },
-
-  created() {
-  this.loading = true;
-
-    this.executor
-      .on('success', response => {
-          this.value = response.data;
-          this.loading = false;
-      })
-      .on('error', error => {
-          this.value = null;
-          this.error = error;
-          this.loading = false;
-      })
-      .execute();
-  }
-}
+};
 </script>

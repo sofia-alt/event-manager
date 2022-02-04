@@ -32,15 +32,13 @@ export default {
         Link: null,
         Description: null,
         Category: {},
-        Participants: []
+        Participants: [],
       },
     };
   },
 
   methods: {
-    submit(value) {
-
-    },
+    submit(value) {},
 
     close() {
       this.visible = false;

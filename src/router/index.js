@@ -7,18 +7,17 @@ const routes = [
     path: '',
     name: 'events',
     component: () => import('@/views/Events.vue'),
-    props: { default: true, sidebar: false },
+    props: true,
     children: [
       {
         name: 'event',
         path: '/:id',
         component: () => import('@/components/Event/EventCard'),
-        props: { default: true, sidebar: false },
-        children:  [
+        props: true,
+        children: [
           {
-            path: '/:id/modal',
-            name: 'modal',
-            props: { default: true, sidebar: false },
+            path: 'update',
+            name: 'update',
             component: () => import('@/components/Event/Popup/EventUpdater')
           }
         ]
